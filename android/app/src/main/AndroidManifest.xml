@@ -3,6 +3,7 @@
         android:label="adivina_el_numero"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        android:RoundIcon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
