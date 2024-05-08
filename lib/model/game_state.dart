@@ -18,7 +18,8 @@ class GameState extends ChangeNotifier {
   late int _scoreMultiplier;
   String _playerName = '';
   late Dificultad _difficulty;
-
+  String _hint = '';
+  bool _hintUsed = false;
   // Private constructor
   GameState._internal();
 
@@ -41,7 +42,9 @@ class GameState extends ChangeNotifier {
   String get playerName => _playerName;
   Dificultad get difficulty => _difficulty;
   int get score => _score;
-
+  String get hint => _hint;
+  bool get hintUsed => _hintUsed;
+  // Methods
   void resetGame() {
     _min = _difficulty.min;
     _max = _difficulty.max;
@@ -53,6 +56,8 @@ class GameState extends ChangeNotifier {
     _timer?.cancel();
     _tries = _difficulty.intentos;
     _score = 0;
+    _hint = '';
+    _hintUsed = false;
     _scoreMultiplier = _difficulty.multiplicadorScore;
     startTimer();
     notifyListeners();
@@ -61,6 +66,12 @@ class GameState extends ChangeNotifier {
   void setDifficulty(Dificultad difficulty) {
     _difficulty = difficulty;
     resetGame();
+  }
+
+  void setHint(String hint) {
+    _hintUsed = true;
+    _hint = hint;
+    notifyListeners();
   }
 
   void setUpperBound(int value) {
@@ -108,9 +119,17 @@ class GameState extends ChangeNotifier {
   }
 
   void calculateScore() {
-    _score = _score +
-        (_timeRemaining * _scoreMultiplier) +
-        (_difficulty.intentos - _tries) * _scoreMultiplier;
+    if (!_hintUsed) {
+      _score = _score +
+          (_timeRemaining * _scoreMultiplier) +
+          (_difficulty.intentos - _tries) * _scoreMultiplier;
+    } else {
+      _score = _score +
+          (_timeRemaining * _scoreMultiplier) +
+          (_difficulty.intentos - _tries) * _scoreMultiplier;
+      _score = _score ~/ 2;
+    }
+
     notifyListeners();
   }
 }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum Dificultad {
   facil("Fácil", 5, 1, 0, 10, 1),
   medio("Medio", 10, 2, 0, 100, 2),

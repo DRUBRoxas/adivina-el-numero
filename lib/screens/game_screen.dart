@@ -1,9 +1,11 @@
+import 'package:adivina_el_numero/screens/hint_modal_display.dart';
 import 'package:adivina_el_numero/screens/pause_dialog.dart';
 import 'package:adivina_el_numero/components/tries_display.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/game_state.dart';
 import '../components/keyboard.dart';
+import 'hint_display.dart';
 import 'loser_screen.dart';
 import '../components/lower_bound_display.dart';
 import '../components/number_input_form.dart';
@@ -79,11 +81,29 @@ class _GameScreenState extends State<GameScreen> {
                         const UpperBoundDisplay(),
                         SizedBox(height: screenHeight * 0.02),
                         const LowerBoundDisplay(),
+                        SizedBox(height: screenHeight * 0.02),
+                        const HintDisplay(),
                       ],
                     ),
                   ),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    var gameState =
+                        Provider.of<GameState>(context, listen: false);
+                    gameState.stopTimer();
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return HintModalDisplay(gameState: gameState);
+                          }).then((_) {
+                        gameState.startTimer();
+                      });
+                    });
+                  },
+                  child: const Text('Pista')),
               Expanded(
                 flex: 4, // 40% of space
                 child: Keyboard(controller: _controller, formKey: _formKey),

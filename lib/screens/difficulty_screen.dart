@@ -129,24 +129,27 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: textColor,
-                      backgroundColor: buttonColor,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: screenHeight * 0.05),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: textColor,
+                        backgroundColor: buttonColor,
+                      ),
+                      onPressed: dificultadSeleccionada != null
+                          ? () {
+                              gameState.setDifficulty(dificultadSeleccionada!);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GameScreen(),
+                                ),
+                              );
+                            }
+                          : null,
+                      child: const Text('Comenzar',
+                          style: TextStyle(fontSize: 18)),
                     ),
-                    onPressed: dificultadSeleccionada != null
-                        ? () {
-                            gameState.setDifficulty(dificultadSeleccionada!);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const GameScreen(),
-                              ),
-                            );
-                          }
-                        : null,
-                    child:
-                        const Text('Comenzar', style: TextStyle(fontSize: 18)),
                   ),
                 ],
               ),

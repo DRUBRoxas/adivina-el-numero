@@ -47,7 +47,7 @@ class _NumberInputFormState extends State<NumberInputForm> {
             }
             int num = int.parse(value);
             if (num > gameState.max) {
-              return 'El número introducido está fuera del rango permitido';
+              return 'El número introducido está fuera del rango';
             }
             return null;
           },
