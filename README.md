@@ -45,6 +45,7 @@ Introduce un nombre, elige una dificultad y empieza a jugar. Introduce tu suposi
 ## Contacto
 
 Manuel Sánchez Salazar - manuel9.acci@gmail.com
-Jaime Rubio López
+
+Jaime Rubio López - jaimepk10@gmail.com
 
 Enlace del Proyecto: [https://github.com/DRUBRoxas/adivina_el_numero](https://github.com/DRUBRoxas/adivina_el_numero)
